@@ -1,0 +1,23 @@
+return-path:,no-reply@suspicious-domain.com>
+Delivered-To: user@example.com
+Received: from mail.suspicious-domain.com (suspicious-domain.com [185.234.219.89])
+    by mx.google.com with ESMTPS id def456
+    for <user@example.com>; Mon, 15 Jan 2024 14:45:00 -0800
+From: PayPal Security <security@paypal.com>
+To: user@example.com
+Subject: URGENT: Account Suspended - Verify Now
+Date: Mon, 15 Jan 2024 14:45:00 -0800
+Message-ID: <20240115144500.DEF456@suspicious-domain.com>
+Authentication-Results: mx.google.com;
+    spf=fail (google.com: domain of security@paypal.com does not designate 185.234.219.89 as permitted sender);
+    dkim=fail header.i=@paypal.com;
+    dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=paypal.com
+X-Mailer: PHP Mail v5.4
+Content-Type: text/html; charset=utf-8
+
+<html>
+<body>
+<h2>Account Suspended!</h2>
+<p>Click here to verify: <a href="http://paypal-security.suspicious-domain.com/verify">Verify Account</a></p>
+</body>
+</html>

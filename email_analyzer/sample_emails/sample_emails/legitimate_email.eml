@@ -1,0 +1,26 @@
+Return-path:<support@paypal.com>
+	Delivered-To: user@example.com
+Received: from mail.paypal.com (mail.paypal.com [66.211.169.66])
+    by mx.google.com with ESMTPS id abc123
+    for <user@example.com>; Mon, 15 Jan 2024 10:30:00 -0800
+Received: from internal.paypal.com (internal.paypal.com [10.0.0.1])
+    by mail.paypal.com with ESMTP id xyz789
+    for <user@example.com>; Mon, 15 Jan 2024 10:29:58 -0800
+From: PayPal Support <support@paypal.com>
+To: user@example.com
+Subject: Your Account Statement
+Date: Mon, 15 Jan 2024 10:29:58 -0800
+Message-ID: <20240115102958.ABC123@paypal.com>
+Authentication-Results: mx.google.com;
+    spf=pass (google.com: domain of support@paypal.com designates 66.211.169.66 as permitted sender);
+    dkim=pass header.i=@paypal.com;
+    dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=paypal.com
+X-Mailer: PayPal Email System v2.1
+Content-Type: text/plain; charset=utf-8
+
+Dear Customer,
+
+Your monthly account statement is ready for review.
+
+Best regards,
+PayPal Support Team

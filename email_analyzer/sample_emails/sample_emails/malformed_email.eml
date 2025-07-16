@@ -1,0 +1,18 @@
+Return-Path:<attacker@evil.com>
+Delivered-To: user@example.com
+Received: from [192.168.1.100] (unknown [203.0.113.1])
+    by mx.google.com with ESMTP id ghi789
+    for <user@example.com>; Mon, 15 Jan 2024 16:20:00 -0800
+From: "Bank Manager" <manager@legitimate-bank.com>
+To: user@example.com
+Subject: =?utf-8?B?8J+RjSBCYW5rIE5vdGlmaWNhdGlvbg==?=
+Date: Mon, 15 Jan 2024 16:20:00 -0800
+Message-ID: <invalid-message-id>
+Authentication-Results: mx.google.com;
+    spf=neutral (google.com: 203.0.113.1 is neither permitted nor denied);
+    dkim=none;
+    dmarc=none
+X-Mailer: 
+Content-Type: text/plain; charset=utf-8
+
+Urgent banking notification...

@@ -1,0 +1,37 @@
+Incident Report: SQL Injection Attempt Detected
+
+Date: 2025-07-11
+Time: 10:30 - 10:35 UTC
+Target System: Apache Web Server on Kali Linux
+
+Incident Summary:
+A potential SQL injection attack was detected targeting the /products endpoint of the web application.
+
+Detection Details:
+
+1. Apache access.log:
+   - Found suspicious GET request containing SQL syntax:
+     192.168.0.10 - - [11/Jul/2025:10:30:00 +0000] "GET /products?id=1 OR 1=1 HTTP/1.1" 404 -
+
+2. Burp Suite Scan Logs:
+   - SQL Injection vulnerability detected during active scanning.
+   - Payloads used: ' OR 1=1, UNION SELECT, and tautology-based attacks.
+
+3. Anomaly Detection Logs:
+   - anomaly_report.csv entry:
+     2025-07-11 10:31:00,192.168.0.10,SQL Injection Attempt
+
+🔑 Action Taken:
+- Blocked the suspicious IP (192.168.0.10) in the firewall.
+- Reviewed application input sanitization.
+- Notified development team to implement proper SQL parameterization.
+
+📊 Impact:
+No sensitive data was exfiltrated. Attack was detected early.
+
+🛡️ Recommendations:
+- Harden web application input validation.
+- Enable Web Application Firewall (WAF).
+- Continue monitoring for recurring attacks.
+
+✅ Status: Mitigated

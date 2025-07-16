@@ -1,0 +1,158 @@
+[
+  {
+    "file": "sample_emails/legitimate_email.eml",
+    "timestamp": "2025-07-16T00:45:22.564592",
+    "threat_level": "LOW",
+    "headers": {
+      "from": "PayPal Support <support@paypal.com>",
+      "reply_to": "",
+      "return_path": "<support@paypal.com>\n\tDelivered-To: user@example.com",
+      "to": "user@example.com",
+      "subject": "Your Account Statement",
+      "date": "Mon, 15 Jan 2024 10:29:58 -0800",
+      "message_id": "<20240115102958.ABC123@paypal.com>",
+      "x_mailer": "PayPal Email System v2.1",
+      "received": [
+        "from mail.paypal.com (mail.paypal.com [66.211.169.66])\n    by mx.google.com with ESMTPS id abc123\n    for <user@example.com>; Mon, 15 Jan 2024 10:30:00 -0800",
+        "from internal.paypal.com (internal.paypal.com [10.0.0.1])\n    by mail.paypal.com with ESMTP id xyz789\n    for <user@example.com>; Mon, 15 Jan 2024 10:29:58 -0800"
+      ],
+      "authentication_results": "mx.google.com;\n    spf=pass (google.com: domain of support@paypal.com designates 66.211.169.66 as permitted sender);\n    dkim=pass header.i=@paypal.com;\n    dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=paypal.com"
+    },
+    "authentication": {
+      "spf": "pass",
+      "dkim": "pass",
+      "dmarc": "pass"
+    },
+    "issues": [],
+    "summary": {
+      "total_issues": 0,
+      "high_severity": 0,
+      "medium_severity": 0,
+      "low_severity": 0
+    }
+  },
+  {
+    "file": "sample_emails/malformed_email.eml",
+    "timestamp": "2025-07-16T00:45:22.565396",
+    "threat_level": "HIGH",
+    "headers": {
+      "from": "\"Bank Manager\" <manager@legitimate-bank.com>",
+      "reply_to": "",
+      "return_path": "<attacker@evil.com>",
+      "to": "user@example.com",
+      "subject": "=?utf-8?B?8J+RjSBCYW5rIE5vdGlmaWNhdGlvbg==?=",
+      "date": "Mon, 15 Jan 2024 16:20:00 -0800",
+      "message_id": "<invalid-message-id>",
+      "x_mailer": "",
+      "received": [
+        "from [192.168.1.100] (unknown [203.0.113.1])\n    by mx.google.com with ESMTP id ghi789\n    for <user@example.com>; Mon, 15 Jan 2024 16:20:00 -0800"
+      ],
+      "authentication_results": "mx.google.com;\n    spf=neutral (google.com: 203.0.113.1 is neither permitted nor denied);\n    dkim=none;\n    dmarc=none"
+    },
+    "authentication": {
+      "spf": "neutral",
+      "dkim": "none",
+      "dmarc": "none"
+    },
+    "issues": [
+      {
+        "type": "DOMAIN_MISMATCH",
+        "description": "From domain (legitimate-bank.com) != Return-Path domain (evil.com)",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "MALFORMED_MESSAGE_ID",
+        "description": "Invalid Message-ID format: <invalid-message-id>",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "SUSPICIOUS_IP",
+        "description": "Suspicious IP in routing: 203.0.113.1",
+        "severity": "HIGH"
+      }
+    ],
+    "summary": {
+      "total_issues": 3,
+      "high_severity": 1,
+      "medium_severity": 2,
+      "low_severity": 0
+    }
+  },
+  {
+    "file": "sample_emails/spoofed_emails.eml",
+    "timestamp": "2025-07-16T00:45:22.566263",
+    "threat_level": "HIGH",
+    "headers": {
+      "from": "PayPal Security <security@paypal.com>",
+      "reply_to": "",
+      "return_path": ",no-reply@suspicious-domain.com>",
+      "to": "user@example.com",
+      "subject": "URGENT: Account Suspended - Verify Now",
+      "date": "Mon, 15 Jan 2024 14:45:00 -0800",
+      "message_id": "<20240115144500.DEF456@suspicious-domain.com>",
+      "x_mailer": "PHP Mail v5.4",
+      "received": [
+        "from mail.suspicious-domain.com (suspicious-domain.com [185.234.219.89])\n    by mx.google.com with ESMTPS id def456\n    for <user@example.com>; Mon, 15 Jan 2024 14:45:00 -0800"
+      ],
+      "authentication_results": "mx.google.com;\n    spf=fail (google.com: domain of security@paypal.com does not designate 185.234.219.89 as permitted sender);\n    dkim=fail header.i=@paypal.com;\n    dmarc=fail (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=paypal.com"
+    },
+    "authentication": {
+      "spf": "fail",
+      "dkim": "fail",
+      "dmarc": "fail"
+    },
+    "issues": [
+      {
+        "type": "DOMAIN_MISMATCH",
+        "description": "From domain (paypal.com) != Return-Path domain (suspicious-domain.com)",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "SPF_FAIL",
+        "description": "SPF authentication failed",
+        "severity": "HIGH"
+      },
+      {
+        "type": "DKIM_FAIL",
+        "description": "DKIM authentication failed",
+        "severity": "HIGH"
+      },
+      {
+        "type": "DMARC_FAIL",
+        "description": "DMARC authentication failed",
+        "severity": "HIGH"
+      },
+      {
+        "type": "SUSPICIOUS_MAILER",
+        "description": "Suspicious X-Mailer: PHP Mail v5.4",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "URGENT_KEYWORD",
+        "description": "Urgent keyword in subject: \"urgent\"",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "URGENT_KEYWORD",
+        "description": "Urgent keyword in subject: \"suspended\"",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "URGENT_KEYWORD",
+        "description": "Urgent keyword in subject: \"verify now\"",
+        "severity": "MEDIUM"
+      },
+      {
+        "type": "SUSPICIOUS_IP",
+        "description": "Suspicious IP in routing: 185.234.219.89",
+        "severity": "HIGH"
+      }
+    ],
+    "summary": {
+      "total_issues": 9,
+      "high_severity": 4,
+      "medium_severity": 5,
+      "low_severity": 0
+    }
+  }
+]
